@@ -1,0 +1,28 @@
+doctype html
+html
+	head
+		title= title
+	body
+		#header
+			#header-logo
+				a.logo(href='/' title='BookBrainz')
+					strong BookBrainz
+				div
+					form(action='/search', method='get')
+						input#headerid-query(name='query', placeholder='Query', type='text', value='')
+
+						select#headerid-type(name='type')
+							option(value='person') Person
+							option(value='edition_group') Edition Group
+							option(value='edition') Edition
+							option(value='work') Work
+							option(value='publisher') Publisher
+
+						input#headerid-method(name='method', type='hidden', value='indexed')
+
+						span.buttons.inline
+							button(type='submit') Search
+
+		#page
+			#content
+				block content
