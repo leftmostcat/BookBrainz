@@ -22,7 +22,6 @@ Book.prototype.insert = function(data, callback) {
 
 			cursor.query('INSERT INTO book(master_revision_id) VALUES($1) RETURNING book_id', [ revision_id ], function(err, results) {
 				var book_id = results[0].book_id;
-				console.log(book_id);
 
 				cursor.query('INSERT INTO creator_credit(pre_phrase) VALUES($1) RETURNING creator_credit_id', [ data.pre_phrase ], function(err, results) {
 					var creator_credit_id = results[0].creator_credit_id;
