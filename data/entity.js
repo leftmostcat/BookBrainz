@@ -6,12 +6,11 @@ function Entity(app) {
 	this.sql = app.get('db');
 }
 
-Entity.prototype.get_by_id = function(id) {
-	return this.sql.query('SELECT ' + this._id_column +
+Entity.prototype.get_by_id = function(id, callback) {
+	this.sql.query('SELECT ' + this._columns +
 				' FROM ' + this._table +
 				' WHERE ' + this._id_column + ' = $1',
-				[ id ])[0][this._id_column];
-				
+				[ id ], callback);
 };
 
 Entity.prototype.insert = function() {};
