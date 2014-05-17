@@ -30,7 +30,21 @@ router.post('/add', function(req, res, next) {
 			return next(err);
 		}
 
-		res.redirect('/');
+		res.redirect('/book/' + book_id);
+	});
+});
+
+router.get('/:bbid', function(req, res, next) {
+	var book = new Book(req.app);
+
+	book.get_by_uuid(req.params.bbid, function(err, results) {
+		if (err) {
+			res.status(500);
+			return next(err);
+		}
+
+		res.locals.book = results[0];
+		res.render('book', { title: '“' + res.locals.book.name + '” – BookBrainz' });
 	});
 });
 
