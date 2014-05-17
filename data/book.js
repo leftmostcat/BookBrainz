@@ -26,8 +26,8 @@ Book.prototype.insert = function(data, callback) {
 				cursor.query('INSERT INTO creator_credit(pre_phrase) VALUES($1) RETURNING creator_credit_id', [ data.pre_phrase ], function(err, results) {
 					var creator_credit_id = results[0].creator_credit_id;
 
-					async.parallel([
-						function(parallelback) {
+					async.parallel({
+						credits: function(parallelback) {
 							async.each(data.credits, function(name, eachback) {
 								cursor.query('INSERT INTO creator_credit_name(creator_credit_id, position, creator_id, name, join_phrase)' +
 									' VALUES($1, $2, $3, $4, $5)',
@@ -39,7 +39,7 @@ Book.prototype.insert = function(data, callback) {
 								parallelback(err);
 							});
 						},
-						function(parallelback) {
+						book: function(parallelback) {
 							cursor.query('INSERT INTO book_data(name, creator_credit_id, book_type_id, comment)' + 
 								' VALUES($1, $2, $3, $4) RETURNING book_data_id',
 								[ data.title, creator_credit_id, data.book_primary_type_id, data.comment ], function(err, results) {
@@ -57,18 +57,18 @@ Book.prototype.insert = function(data, callback) {
 
 											cursor.query('INSERT INTO book_revision(revision_id, book_id, book_tree_id)' +
 												' VALUES($1, $2, $3)', [ revision_id, book_id, book_tree_id ], function(err) {
-													parallelback(err);
+													parallelback(err, book_id);
 												});
 										});
 								});
 						}
-					],
-					function(err) {
+					},
+					function(err, results) {
 						if (err)
 							return callback(err);
 
 						cursor.commit(function(err) {
-							callback(err);
+							callback(err, results.book);
 						});
 					});
 				});
