@@ -44,6 +44,12 @@ router.get('/:bbid', function(req, res, next) {
 		}
 
 		res.locals.book = results[0];
+
+		if (!res.locals.book) {
+			res.status(404);
+			return next('Not Found');
+		}
+
 		res.render('book', { title: '“' + res.locals.book.name + '” – BookBrainz' });
 	});
 });
