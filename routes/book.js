@@ -7,7 +7,7 @@ router.get('/create', function(req, res) {
 	res.render('book_create', { title: 'Add Book – BookBrainz' });
 });
 
-router.post('/add', function(req, res) {
+router.post('/add', function(req, res, next) {
 	var data = {
 		editor_id: 2,
 		title: req.param('title'),
@@ -24,9 +24,11 @@ router.post('/add', function(req, res) {
 
 	var book = new Book(req.app);
 
-	book.insert(data, function(err) {
-		if (err)
+	book.insert(data, function(err, book_id) {
+		if (err) {
 			res.status(500);
+			return next(err);
+		}
 
 		res.redirect('/');
 	});
