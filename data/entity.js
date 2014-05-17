@@ -1,3 +1,5 @@
+/* vim: ts=4:sw=4 */
+
 function Entity(app) {
 	this._columns = undefined;
 	this._table = undefined;
