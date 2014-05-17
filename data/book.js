@@ -1,16 +1,17 @@
 var async = require('async');
 var util = require('util');
 
-var super_ = require('./entity');
+var super_ = require('./coreentity');
 
 function Book(app) {
-	this._columns = undefined;
-	this._table = undefined;
-	this._column_mapping = {};
-	this._id_column = 'id';
-	this.sql = app.get('db');
-
 	Book.super_.call(this, app);
+
+	this._columns = 'book.book_id, bd.name, bd.creator_credit_id, bd.book_type_id, bd.comment';
+	this._table = 'book' +
+			' LEFT JOIN book_revision AS br ON book.master_revision_id = br.revision_id AND book.book_id = br.book_id' +
+			' LEFT JOIN book_tree AS bt ON br.book_tree_id = bt.book_tree_id' +
+			' LEFT JOIN book_data AS bd ON bt.book_data_id = bd.book_data_id';
+	this._id_column = 'book.book_id';
 }
 
 util.inherits(Book, super_);
