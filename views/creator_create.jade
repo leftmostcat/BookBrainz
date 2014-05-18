@@ -1,0 +1,39 @@
+// vim: ts=4:sw=4
+
+extends layout
+
+block content
+	form(action='/creator/add', method='post')
+		dl
+			dt Name:
+			dd
+				input(type='text', name='name')
+
+			dt Sort Name:
+			dd
+				input(type='text', name='sort_name')
+
+			dt Type:
+			dd
+				select(name='creator_type_id')
+					option(value='1') Person
+
+			dt Country:
+			dd
+				select(name='country_id')
+					option(value='1') United States
+
+			dt Gender:
+			dd
+				select(name='gender_id')
+					option(value='1') Male
+
+			dt Comment:
+			dd
+				textarea(name='comment')
+
+			dt Ended:
+			dd
+				input(type='checkbox', name='ended')
+
+			input(type='submit', value='Add Creator')
