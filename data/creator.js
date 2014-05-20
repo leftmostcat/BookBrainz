@@ -1,65 +1,84 @@
 /* vim: ts=4:sw=4 */
 
-var async = require('async');
+var knex = require('knex').knex;
 var util = require('util');
 
 var super_ = require('./coreentity');
 
-function Creator(app) {
-	Creator.super_.call(this, app);
-
-	this._columns = 'creator.creator_id, cd.name, cd.sort_name, cd.begin_date_year, cd.begin_date_month, cd.begin_date_day, cd.end_date_year,' +
-					' cd.end_date_month, cd.end_date_day, cd.creator_type_id, cd.country_id, cd.gender_id, cd.comment, cd.ended';
-	this._table = 'creator' +
-				  ' LEFT JOIN creator_revision AS cr ON creator.master_revision_id = cr.revision_id AND creator.creator_id = cr.creator_id' +
-				  ' LEFT JOIN creator_tree AS ct ON cr.creator_tree_id = ct.creator_tree_id' +
-				  ' LEFT JOIN creator_data AS cd ON ct.creator_data_id = cd.creator_data_id';
-	this._id_column = 'creator.creator_id';
+function Creator() {
+	Creator.super_.call(this);
 }
 
 util.inherits(Creator, super_);
 
-Creator.prototype.insert = function(data, callback) {
-	this.sql.begin(function(err, cursor) {
-		if (err)
-			return callback(err);
+Creator.prototype._table = 'creator';
+Creator.prototype._id_column = 'creator.creator_id';
+Creator.prototype._columns = [
+	'creator.creator_id',
+	'creator_data.name',
+	'creator_data.sort_name',
+	'creator_data.begin_date_year',
+	'creator_data.begin_date_month',
+	'creator_data.begin_date_day',
+	'creator_data.end_date_year',
+	'creator_data.end_date_month',
+	'creator_data.end_date_day',
+	'creator_data.creator_type_id',
+	'creator_data.country_id',
+	'creator_data.gender_id',
+	'creator_data.comment',
+	'creator_data.ended'
+];
+Creator.prototype._joins = [
+	{ type: 'left', table: 'creator_revision', first: 'creator.master_revision_id', second: 'creator_revision.revision_id' },
+	{ type: 'left', table: 'creator_tree', first: 'creator_revision.creator_tree_id', second: 'creator_tree.creator_tree_id' },
+	{ type: 'left', table: 'creator_data', first: 'creator_tree.creator_data_id', second: 'creator_data.creator_data_id' }
+];
 
+Creator.prototype.insert = function(data, callback) {
+	knex.transaction(function(t) {
 		var revision_id, creator_id;
 
-		cursor.query('INSERT INTO revision(editor_id) VALUES($1) RETURNING revision_id', [ data.editor_id ]).then(function(results) {
-			revision_id = results[0].revision_id;
+		knex('revision').transacting(t).insert({ editor_id: data.editor_id }, 'revision_id')
+			.then(function(result) {
+				revision_id = result[0];
 
-			return cursor.query('INSERT INTO creator(master_revision_id) VALUES($1) RETURNING creator_id', [ revision_id ]);
-		}).then(function(results) {
-			creator_id = results[0].creator_id;
+				return knex('creator').transacting(t).insert({ master_revision_id: revision_id }, 'creator_id');
+			})
+			.then(function(result) {
+				creator_id = result[0];
 
-			return cursor.query('INSERT INTO creator_data(name, sort_name, begin_date_year, begin_date_month,' +
-								' begin_date_day, end_date_year, end_date_month, end_date_day, creator_type_id,' +
-								' country_id, gender_id, comment, ended) VALUES($1, $2, $3, $4, $5, $6, $7, $8,' +
-								' $9, $10, $11, $12, $13) RETURNING creator_data_id',
-								[ data.name, data.sort_name, data.begin_date_year, data.begin_date_month, data.begin_date_day,
-								  data.end_date_year, data.end_date_month, data.end_date_day, data.creator_type_id,
-								  data.country_id, data.gender_id, data.comment, data.ended ]);
-		}).then(function(results) {
-			var creator_data_id = results[0].creator_data_id;
-
-			return cursor.query('INSERT INTO creator_tree(creator_data_id) VALUES($1) RETURNING creator_tree_id', [ creator_data_id ]);
-		}).then(function(results) {
-			var creator_tree_id = results[0].creator_tree_id;
-
-			return cursor.query('INSERT INTO creator_revision(revision_id, creator_id, creator_tree_id)' +
-								' VALUES($1, $2, $3)', [ revision_id, creator_id, creator_tree_id ]);
-		}).then(function() {
-			return cursor.commit();
-		}).done(
-			function() {
-				callback(undefined, creator_id);
-			},
-			function(err) {
-				callback(err);
-			}
-		);
-	});
+				return knex('creator_data').transacting(t).insert({
+					name: data.name,
+					sort_name: data.sort_name,
+					begin_date_year: data.begin_date_year,
+					begin_date_month: data.begin_date_month,
+					begin_date_day: data.begin_date_day,
+					end_date_year: data.end_date_year,
+					end_date_month: data.end_date_month,
+					end_date_day: data.end_date_day,
+					creator_type_id: data.creator_type_id,
+					country_id: data.country_id,
+					gender_id: data.gender_id,
+					comment: data.comment,
+					ended: data.ended
+				}, 'creator_data_id');
+			})
+			.then(function(result) {
+				return knex('creator_tree').transacting(t).insert({ creator_data_id: result[0] }, 'creator_tree_id');
+			})
+			.then(function(result) {
+				return knex('creator_revision').transacting(t).insert({
+					revision_id: revision_id,
+					creator_id: creator_id,
+					creator_tree_id: result[0]
+				});
+			})
+			.then(function() {
+				t.commit(creator_id);
+			})
+			.catch(t.rollback);
+	}).exec(callback);
 };
 
 module.exports = Creator;

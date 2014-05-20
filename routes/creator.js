@@ -27,7 +27,7 @@ router.post('/add', function(req, res, next) {
 		ended: req.param('ended') ? req.param('ended') : false
 	};
 
-	var creator = new Creator(req.app);
+	creator = new Creator();
 
 	creator.insert(data, function(err, creator_id) {
 		if (err) {
@@ -40,7 +40,7 @@ router.post('/add', function(req, res, next) {
 });
 
 router.get('/:bbid', function(req, res, next) {
-	var creator = new Creator(req.app);
+	var creator = new Creator();
 
 	creator.get_by_uuid(req.params.bbid, function(err, results) {
 		if (err) {

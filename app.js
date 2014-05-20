@@ -7,13 +7,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var Knex = require('knex');
+
+Knex.knex = Knex.initialize({
+	client: 'pg',
+	connection: {
+		host: 'localhost',
+		user: 'bookbrainz',
+		password: 'bookbrainz',
+		database: 'bookbrainz'
+	}
+});
+
 var routes = require('./routes/index');
 var book = require('./routes/book');
 var creator = require('./routes/creator');
 
 var app = express();
-
-var pgsql = require('./lib/pgsql');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -54,7 +64,5 @@ app.use(function(err, req, res, next) {
 				error: {}
 		});
 });
-
-app.set('db', new pgsql());
 
 module.exports = app;

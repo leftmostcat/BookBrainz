@@ -3,8 +3,8 @@
 var super_ = require('./entity');
 var util = require('util');
 
-function CoreEntity(app) {
-	CoreEntity.super_.call(this, app);
+function CoreEntity() {
+	CoreEntity.super_.call(this);
 }
 
 util.inherits(CoreEntity, super_);
