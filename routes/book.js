@@ -39,7 +39,7 @@ router.post('/add', function(req, res, next) {
 router.get('/:bbid', function(req, res, next) {
 	var book = new Book();
 
-	book.get_by_uuid(req.params.bbid, function(err, results) {
+	book.get_by_id(req.params.bbid, function(err, results) {
 		if (err) {
 			res.status(500);
 			return next(err);

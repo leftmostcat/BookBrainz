@@ -42,7 +42,7 @@ router.post('/add', function(req, res, next) {
 router.get('/:bbid', function(req, res, next) {
 	var creator = new Creator();
 
-	creator.get_by_uuid(req.params.bbid, function(err, results) {
+	creator.get_by_id(req.params.bbid, function(err, results) {
 		if (err) {
 			res.status(500);
 			return next(err);
