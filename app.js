@@ -7,9 +7,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var Knex = require('knex');
+var knex = require('knex');
 
-Knex.knex = Knex.initialize({
+knex.knex = knex.initialize({
 	client: 'pg',
 	connection: {
 		host: 'localhost',
