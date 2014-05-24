@@ -6,6 +6,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 var settings = require('./config/settings');
 
@@ -66,5 +69,13 @@ app.use(function(err, req, res, next) {
 				error: {}
 		});
 });
+
+var httpsOptions = {
+	key: fs.readFileSync('config/bookbrainz.key'),
+	cert: fs.readFileSync('config/bookbrainz.crt')
+};
+
+http.createServer(app).listen(settings.server.portHTTP);
+https.createServer(httpsOptions, app).listen(settings.server.portHTTPS);
 
 module.exports = app;
