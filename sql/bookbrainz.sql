@@ -759,7 +759,6 @@ ALTER TABLE bookbrainz.edit_work OWNER TO bookbrainz;
 CREATE TABLE editor (
     id integer NOT NULL,
     name character varying(64) NOT NULL,
-    password character varying(64) NOT NULL,
     privs integer DEFAULT 0,
     email character varying(64) DEFAULT NULL::character varying,
     website character varying(255) DEFAULT NULL::character varying,
