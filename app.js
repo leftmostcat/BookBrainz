@@ -7,17 +7,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var config = require('./config');
+var settings = require('./config/settings');
 
 var knex = require('knex');
 
 knex.knex = knex.initialize({
 	client: 'pg',
 	connection: {
-		host: config.database.host,
-		user: config.database.user,
-		password: config.database.password,
-		database: config.database.database
+		host: settings.database.host,
+		user: settings.database.user,
+		password: settings.database.password,
+		database: settings.database.database
 	}
 });
 
