@@ -4,9 +4,9 @@ var knex = require('knex').knex;
 
 function Entity() {}
 
-Entity.prototype._columns = undefined;
+Entity.prototype._columns = [];
 Entity.prototype._table = undefined;
-Entity.prototype._joins = undefined;
+Entity.prototype._joins = [];
 Entity.prototype._column_mapping = {};
 Entity.prototype._id_column = 'id';
 
