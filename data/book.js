@@ -1,4 +1,4 @@
-/* vim: ts=4:sw=4 */
+/* vim: set ts=4 sw=4 : */
 
 var Promise = require('bluebird');
 var knex = require('knex').knex;
