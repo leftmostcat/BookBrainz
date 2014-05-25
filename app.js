@@ -5,13 +5,16 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
 var settings = require('./config/settings');
 
+var MusicBrainzStrategy = require('./lib/passport-musicbrainz');
 var knex = require('knex');
 
 knex.knex = knex.initialize({
@@ -22,6 +25,48 @@ knex.knex = knex.initialize({
 		password: settings.database.password,
 		database: settings.database.database
 	}
+});
+
+var Editor = require('./data/editor');
+
+passport.use(new MusicBrainzStrategy({
+	clientID: settings.oauth2.clientID,
+	clientSecret: settings.oauth2.clientSecret,
+	callbackURL: settings.oauth2.callbackURL
+}, function(accessToken, refreshToken, profile, done) {
+	var editor = new Editor();
+
+	editor.get_by_name(profile.name)
+		.then(function(result) {
+			if (result.length) {
+				return result;
+			}
+			else {
+				data = {
+					name: profile.name,
+					email: profile.email
+				};
+
+				return editor.insert(data)
+					.then(function(result) {
+						return editor.get_by_id(result[0]);
+					})
+			}
+		})
+		.catch(function(err) {
+			done(err);
+		})
+		.done(function(result) {
+			done(null, result[0]);
+		});
+}));
+
+passport.serializeUser(function(user, done) {
+	done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+	done(null, user);
 });
 
 var routes = require('./routes/index');
@@ -40,9 +85,22 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+	name: 'sid',
+	secret: settings.session.secret
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', routes);
 app.use('/book', book);
 app.use('/creator', creator);
+
+app.get('/login', passport.authenticate('musicbrainz', { scope: 'profile email' }));
+app.get('/login/callback', passport.authenticate('musicbrainz'), function(req, res) {
+	res.redirect('/');
+});
 
 app.use(function(req, res, next) {
 		var err = new Error('Not Found');
