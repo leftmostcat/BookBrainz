@@ -21,11 +21,6 @@ Book.prototype._columns = [
 	'book_data.book_type_id',
 	'book_data.comment'
 ];
-Book.prototype._joins = [
-	{ type: 'left', table: 'book_revision', first: 'book.master_revision_id', second: 'book_revision.revision_id' },
-	{ type: 'left', table: 'book_tree', first: 'book_revision.book_tree_id', second: 'book_tree.book_tree_id' },
-	{ type: 'left', table: 'book_data', first: 'book_tree.book_data_id', second: 'book_data.book_data_id' }
-];
 
 Book.prototype._insert = function(data, t) {
 	var self = this;

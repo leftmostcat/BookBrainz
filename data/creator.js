@@ -29,10 +29,5 @@ Creator.prototype._columns = [
 	'creator_data.comment',
 	'creator_data.ended'
 ];
-Creator.prototype._joins = [
-	{ type: 'left', table: 'creator_revision', first: 'creator.master_revision_id', second: 'creator_revision.revision_id' },
-	{ type: 'left', table: 'creator_tree', first: 'creator_revision.creator_tree_id', second: 'creator_tree.creator_tree_id' },
-	{ type: 'left', table: 'creator_data', first: 'creator_tree.creator_data_id', second: 'creator_data.creator_data_id' }
-];
 
 module.exports = Creator;
