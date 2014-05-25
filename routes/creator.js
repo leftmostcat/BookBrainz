@@ -12,7 +12,7 @@ router.get('/create', auth.isAuthenticated, function(req, res) {
 
 router.post('/add', auth.isAuthenticated, function(req, res, next) {
 	var data = {
-		editor_id: 2,
+		editor_id: req.user.id,
 		entity_data: {
 			name: req.param('name'),
 			sort_name: req.param('sort_name'),
