@@ -53,29 +53,29 @@ app.use('/book', book);
 app.use('/creator', creator);
 
 app.use(function(req, res, next) {
-		var err = new Error('Not Found');
-		err.status = 404;
-		next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 if (app.get('env') === 'development') {
-		app.use(function(err, req, res) {
-				res.status(err.status || 500);
-				res.render('error', {
-						message: err.message,
-						error: err
-				});
+	app.use(function(err, req, res) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
 		});
+	});
 
-		app.locals.pretty = true;
+	app.locals.pretty = true;
 }
 
 app.use(function(err, req, res) {
-		res.status(err.status || 500);
-		res.render('error', {
-				message: err.message,
-				error: {}
-		});
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
 });
 
 http.createServer(app).listen(settings.server.port);
