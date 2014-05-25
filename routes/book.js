@@ -34,7 +34,6 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 			res.redirect('/book/' + result[0]);
 		})
 		.catch(function(err) {
-			res.status(500);
 			next(err);
 		});
 });
@@ -47,14 +46,14 @@ router.get('/:bbid', function(req, res, next) {
 			res.locals.book = results[0];
 
 			if (!res.locals.book) {
-				res.status(404);
-				return next('Not Found');
+				var err = new Error('Not Found');
+				err.status = 404;
+				return next(err);
 			}
 
 			res.render('book', { title: '“' + res.locals.book.name + '” – BookBrainz' });
 		})
 		.catch(function(err) {
-			res.status(500);
 			return next(err);
 		});
 });
