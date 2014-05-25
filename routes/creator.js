@@ -29,7 +29,7 @@ router.post('/add', function(req, res, next) {
 		}
 	};
 
-	creator = new Creator();
+	var creator = new Creator();
 
 	creator.insert(data)
 		.then(function(result) {
