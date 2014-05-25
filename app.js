@@ -11,8 +11,6 @@ var passport = require('passport');
 var http = require('http');
 
 var settings = require('./config/settings');
-
-var MusicBrainzStrategy = require('./lib/passport-musicbrainz');
 var knex = require('knex');
 
 knex.knex = knex.initialize({
@@ -25,47 +23,7 @@ knex.knex = knex.initialize({
 	}
 });
 
-var Editor = require('./data/editor');
-
-passport.use(new MusicBrainzStrategy({
-	clientID: settings.oauth2.clientID,
-	clientSecret: settings.oauth2.clientSecret,
-	callbackURL: settings.oauth2.callbackURL
-}, function(accessToken, refreshToken, profile, done) {
-	var editor = new Editor();
-
-	editor.get_by_name(profile.name)
-		.then(function(result) {
-			if (result.length) {
-				return result;
-			}
-			else {
-				data = {
-					name: profile.name,
-					email: profile.email
-				};
-
-				return editor.insert(data)
-					.then(function(result) {
-						return editor.get_by_id(result[0]);
-					})
-			}
-		})
-		.catch(function(err) {
-			done(err);
-		})
-		.done(function(result) {
-			done(null, result[0]);
-		});
-}));
-
-passport.serializeUser(function(user, done) {
-	done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-	done(null, user);
-});
+var auth = require('./lib/auth');
 
 var routes = require('./routes/index');
 var book = require('./routes/book');
@@ -88,17 +46,11 @@ app.use(session({
 	secret: settings.session.secret
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+auth.init(app);
 
 app.use('/', routes);
 app.use('/book', book);
 app.use('/creator', creator);
-
-app.get('/login', passport.authenticate('musicbrainz', { scope: 'profile email' }));
-app.get('/login/callback', passport.authenticate('musicbrainz'), function(req, res) {
-	res.redirect('/');
-});
 
 app.use(function(req, res, next) {
 		var err = new Error('Not Found');
