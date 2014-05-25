@@ -20,7 +20,7 @@ Entity.prototype.get_by_id = function(id) {
 	return query.select(this._columns).where(this._id_column, id);
 };
 
-Entity.prototype._insert = function() {};
+Entity.prototype._insert_with_transaction = function() {};
 Entity.prototype.insert = function(data, t) {
 	var self = this;
 
@@ -30,7 +30,7 @@ Entity.prototype.insert = function(data, t) {
 	else {
 		// The calling function didn't give us a transaction, so we make one
 		return knex.transaction(function(t) {
-			self._insert(data, t)
+			self._insert_with_transaction(data, t)
 				.then(t.commit)
 				.catch(t.rollback);
 		});

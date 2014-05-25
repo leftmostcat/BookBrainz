@@ -32,7 +32,7 @@ function CoreEntity() {
 
 util.inherits(CoreEntity, super_);
 
-CoreEntity.prototype._insert = function(data, t) {
+CoreEntity.prototype._insert_with_transaction = function(data, t) {
 	var self = this;
 	var revision_id, entity_id;
 

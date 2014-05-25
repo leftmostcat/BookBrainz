@@ -22,7 +22,7 @@ Book.prototype._columns = [
 	'book_data.comment'
 ];
 
-Book.prototype._insert = function(data, t) {
+Book.prototype._insert_with_transaction = function(data, t) {
 	var self = this;
 
 	return knex('creator_credit').transacting(t).insert({ pre_phrase: data.pre_phrase }, 'creator_credit_id')
@@ -40,7 +40,7 @@ Book.prototype._insert = function(data, t) {
 			});
 		})
 		.then(function() {
-			return Book.super_.prototype._insert.call(self, data, t);
+			return Book.super_.prototype._insert_with_transaction.call(self, data, t);
 		});
 };
 
