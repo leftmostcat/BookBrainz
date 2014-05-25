@@ -9,8 +9,6 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var http = require('http');
-var https = require('https');
-var fs = require('fs');
 
 var settings = require('./config/settings');
 
@@ -128,12 +126,6 @@ app.use(function(err, req, res) {
 		});
 });
 
-var httpsOptions = {
-	key: fs.readFileSync('config/bookbrainz.key'),
-	cert: fs.readFileSync('config/bookbrainz.crt')
-};
-
-http.createServer(app).listen(settings.server.portHTTP);
-https.createServer(httpsOptions, app).listen(settings.server.portHTTPS);
+http.createServer(app).listen(settings.server.port);
 
 module.exports = app;
