@@ -39,7 +39,7 @@ Book.prototype._insert = function(data, t) {
 				});
 			});
 		})
-		.then(function(result) {
+		.then(function() {
 			return Book.super_.prototype._insert.call(self, data, t);
 		});
 };

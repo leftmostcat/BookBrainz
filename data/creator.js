@@ -1,6 +1,5 @@
 /* vim: ts=4:sw=4 */
 
-var knex = require('knex').knex;
 var util = require('util');
 
 var super_ = require('./coreentity');
