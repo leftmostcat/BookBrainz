@@ -3,13 +3,14 @@
 var express = require('express');
 var router = express.Router();
 
+var auth = require('../lib/auth');
 var Book = require('../data/book');
 
-router.get('/create', function(req, res) {
+router.get('/create', auth.isAuthenticated, function(req, res) {
 	res.render('book_create', { title: 'Add Book – BookBrainz' });
 });
 
-router.post('/add', function(req, res, next) {
+router.post('/add', auth.isAuthenticated, function(req, res, next) {
 	var data = {
 		editor_id: 2,
 		pre_phrase: '',
