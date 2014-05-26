@@ -22,10 +22,12 @@ knex.knex = knex.initialize({
 });
 
 var auth = require('./lib/auth');
+var search = require('./lib/search');
 
 var routes = require('./routes/index');
 var book = require('./routes/book');
 var creator = require('./routes/creator');
+var searchroutes = require('./routes/search');
 
 var app = express();
 
@@ -45,10 +47,12 @@ app.use(session({
 }));
 
 auth.init(app);
+search.init();
 
 app.use('/', routes);
 app.use('/book', book);
 app.use('/creator', creator);
+app.use('/search', searchroutes);
 
 app.use(function(req, res, next) {
 	var err = new Error('Not Found');

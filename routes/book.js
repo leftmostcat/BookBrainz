@@ -31,7 +31,7 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 
 	book.insert(data)
 		.then(function(result) {
-			res.redirect('/book/' + result[0]);
+			res.redirect('/book/' + result);
 		})
 		.catch(function(err) {
 			next(err);

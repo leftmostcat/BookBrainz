@@ -19,6 +19,7 @@
 		"knex": "~0.5.14",
 		"bluebird": "~1.2.4",
 		"passport": "~0.2.0",
-		"passport-oauth2": "~1.1.2"
+		"passport-oauth2": "~1.1.2",
+		"elasticsearch": "~2.2.0"
 	}
 }

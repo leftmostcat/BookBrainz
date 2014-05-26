@@ -29,4 +29,13 @@ Creator.prototype._columns = [
 	'creator_data.ended'
 ];
 
+Creator.prototype._build_search_body = function(data) {
+	var body = {
+		name: data.entity_data.name,
+		comment: data.entity_data.comment
+	};
+
+	return body;
+};
+
 module.exports = Creator;

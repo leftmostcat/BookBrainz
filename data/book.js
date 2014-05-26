@@ -22,6 +22,26 @@ Book.prototype._columns = [
 	'book_data.comment'
 ];
 
+Book.prototype._build_search_body = function(data) {
+	var body = {
+		name: data.entity_data.name,
+		comment: data.entity_data.comment,
+		creators: []
+	};
+
+	var creator_credit = data.pre_phrase;
+
+	data.credits.forEach(function(name) {
+		creator_credit += name.name + name.join_phrase;
+
+		body.creators.push(name.id);
+	});
+
+	body.creator_credit = creator_credit;
+
+	return body;
+};
+
 Book.prototype._insert_with_transaction = function(data, t) {
 	var self = this;
 

@@ -14,13 +14,12 @@ html
 						input#headerid-query(name='query', placeholder='Query', type='text', value='')
 
 						select#headerid-type(name='type')
+							option(value='all') All
 							option(value='creator') Creator
 							option(value='book') Book
 							option(value='edition') Edition
 							option(value='work') Work
 							option(value='publisher') Publisher
-
-						input#headerid-method(name='method', type='hidden', value='indexed')
 
 						span.buttons.inline
 							button(type='submit') Search

@@ -34,7 +34,7 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 
 	creator.insert(data)
 		.then(function(result) {
-			res.redirect('/creator/' + result[0]);
+			res.redirect('/creator/' + result);
 		})
 		.catch(function(err) {
 			next(err);
