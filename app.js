@@ -7,8 +7,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var http = require('http');
 
 var settings = require('./config/settings');
 var knex = require('knex');
@@ -78,6 +76,6 @@ app.use(function(err, req, res, next) {
 	});
 });
 
-http.createServer(app).listen(settings.server.port);
+app.listen(settings.server.port);
 
 module.exports = app;

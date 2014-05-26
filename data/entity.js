@@ -7,7 +7,6 @@ function Entity() {}
 Entity.prototype._columns = [];
 Entity.prototype._table = undefined;
 Entity.prototype._joins = [];
-Entity.prototype._column_mapping = {};
 Entity.prototype._id_column = 'id';
 
 Entity.prototype.get_by_id = function(id) {
@@ -20,12 +19,12 @@ Entity.prototype.get_by_id = function(id) {
 	return query.select(this._columns).where(this._id_column, id);
 };
 
-Entity.prototype._insert_with_transaction = function() {};
+Entity.prototype._insert_with_transaction = undefined;
 Entity.prototype.insert = function(data, t) {
 	var self = this;
 
 	if (t) {
-		return this._insert(data, t);
+		return this._insert_with_transaction(data, t);
 	}
 	else {
 		// The calling function didn't give us a transaction, so we make one
