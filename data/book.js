@@ -23,7 +23,7 @@ Book.prototype._columns = [
 ];
 
 Book.prototype._build_search_body = function(data) {
-	var body = Book.super_.prototype._build_search_body.call(self, data);
+	var body = Book.super_.prototype._build_search_body.call(this, data);
 
 	var creator_credit = data.pre_phrase;
 
