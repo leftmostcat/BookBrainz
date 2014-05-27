@@ -35,6 +35,15 @@ function CoreEntity() {
 
 util.inherits(CoreEntity, super_);
 
+CoreEntity.prototype._build_search_body = function(data) {
+	var body = {
+		name: data.entity_data.name,
+		comment: data.entity_data.comment
+	};
+
+	return body;
+};
+
 CoreEntity.prototype._insert_with_transaction = function(data, t) {
 	var self = this;
 	var revision_id, entity_id;

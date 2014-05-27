@@ -23,13 +23,11 @@ Book.prototype._columns = [
 ];
 
 Book.prototype._build_search_body = function(data) {
-	var body = {
-		name: data.entity_data.name,
-		comment: data.entity_data.comment,
-		creators: []
-	};
+	var body = Book.super_.prototype._build_search_body.call(self, data);
 
 	var creator_credit = data.pre_phrase;
+
+	body.creators = [];
 
 	data.credits.forEach(function(name) {
 		creator_credit += name.name + name.join_phrase;
