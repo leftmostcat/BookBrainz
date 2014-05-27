@@ -8,25 +8,28 @@ var super_ = require('./entity');
 function CoreEntity() {
 	CoreEntity.super_.call(this);
 
+	this._data_table = this._table + '_data';
+	this._tree_table = this._table + '_tree';
+	this._revision_table = this._table + '_revision';
+
+	var make_left_join = function(target, source) {
+		return {
+			type: 'left',
+			table: target,
+			first: source + '.' + target + '_id',
+			second: target + '.' + target + '_id'
+		};
+	}
+
 	this._joins = [
 		{
 			type: 'left',
-			table: this._table + '_revision',
+			table: this._revision_table,
 			first: this._table + '.master_revision_id',
-			second: this._table + '_revision.revision_id'
+			second: this._revision_table + '.revision_id'
 		},
-		{
-			type: 'left',
-			table: this._table + '_tree',
-			first: this._table + '_revision.' + this._table + '_tree_id',
-			second: this._table + '_tree.' + this._table + '_tree_id'
-		},
-		{
-			type: 'left',
-			table: this._table + '_data',
-			first: this._table + '_tree.' + this._table + '_data_id',
-			second: this._table + '_data.' + this._table + '_data_id'
-		}
+		make_left_join(this._tree_table, this._revision_table),
+		make_left_join(this._data_table, this._tree_table)
 	];
 }
 
