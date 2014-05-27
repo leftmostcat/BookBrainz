@@ -18,4 +18,26 @@ router.get('/', function(req, res, next) {
 		});
 });
 
+router.get('/autocomplete', function(req, res, next) {
+	var type = req.param('type');
+
+	search.autocomplete(req.param('query'), type)
+		.then(function(results) {
+			var hits = [];
+
+			results.hits.hits.forEach(function(hit) {
+				hits.push({
+					id: hit._id,
+					text: hit._source.name,
+					comment: hit._source.comment
+				});
+			});
+
+			res.json(hits);
+		})
+		.catch(function(err) {
+			return next(err);
+		});
+});
+
 module.exports = router;
