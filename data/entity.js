@@ -25,7 +25,7 @@ Entity.prototype._build_search_body = undefined;
 Entity.prototype._insert_with_transaction = undefined;
 Entity.prototype.insert = function(data, t) {
 	var self = this;
-	var promise = undefined;
+	var promise;
 
 	if (t) {
 		promise = this._insert_with_transaction(data, t);

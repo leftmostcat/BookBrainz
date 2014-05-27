@@ -19,7 +19,7 @@ function CoreEntity() {
 			first: source + '.' + target + '_id',
 			second: target + '.' + target + '_id'
 		};
-	}
+	};
 
 	this._joins = [
 		{
