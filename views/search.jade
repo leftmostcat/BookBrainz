@@ -3,4 +3,15 @@
 extends layout
 
 block content
-	= JSON.stringify(results)
+	if results.hits.hits.length
+		table
+			tr
+				th Name
+				th Type
+			tr
+				each hit in results.hits.hits
+					td
+						a(href='/' + hit._type + '/' + hit._id)= hit._source.name
+					td= hit._type
+	else
+		p No results found.
