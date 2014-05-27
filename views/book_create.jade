@@ -2,6 +2,9 @@
 
 extends layout
 
+block head
+	link(rel='stylesheet', href='/css/select2-3.4.8.css')
+
 block content
 	form(action='/book/add', method='post')
 		dl
@@ -9,11 +12,11 @@ block content
 			dd
 				input(type='text', name='title')
 
-			dt Creator ID:
+			dt Creator:
 			dd
-				input(type='text', name='creator_id')
+				input#creator(type='hidden', name='creator_id', style='width: 200px;')
 
-			dt Creator Name:
+			dt Creator Credit:
 			dd
 				input(type='text', name='creator_name')
 
@@ -27,3 +30,36 @@ block content
 				textarea(name='comment')
 
 			input(type='submit', value='Add Book')
+
+block js
+	script(type='text/javascript' src='/js/jquery-1.11.1.js')
+	script(type='text/javascript' src='/js/select2-3.4.8.js')
+
+	script(type='text/javascript').
+		$(document).ready(function() {
+			$('#creator').select2({
+				placeholder: 'Select Creator…',
+				minimumInputLength: 1,
+				ajax: {
+					url: '/search/autocomplete',
+					dataType: 'json',
+					data: function(query, page) {
+						return {
+							query: query,
+							type: 'creator'
+						};
+					},
+					results: function(data, page) {
+						return { results: data };
+					}
+				},
+				formatResult: function(result) {
+					var formatted = result.text;
+
+					if (result.comment)
+						formatted += ' (' + result.comment + ')';
+
+					return formatted;
+				}
+			});
+		});
