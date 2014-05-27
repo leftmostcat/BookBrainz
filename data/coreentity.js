@@ -50,22 +50,22 @@ CoreEntity.prototype._insert_with_transaction = function(data, t) {
 		.then(function(result) {
 			entity_id = result[0];
 
-			return knex(self._table + '_data').transacting(t)
-				.insert(data.entity_data, self._table + '_data_id');
+			return knex(self._data_table).transacting(t)
+				.insert(data.entity_data, self._data_table + '_id');
 		})
 		.then(function(result) {
 			var data = {};
-			data[self._table + '_data_id'] = result[0];
+			data[self._data_table + '_id'] = result[0];
 
-			return knex(self._table + '_tree').transacting(t)
-				.insert(data, self._table + '_tree_id');
+			return knex(self._tree_table).transacting(t)
+				.insert(data, self._tree_table + '_id');
 		})
 		.then(function(result) {
 			var data = { revision_id: revision_id };
 			data[self._table + '_id'] = entity_id;
-			data[self._table + '_tree_id'] = result[0];
+			data[self._tree_table + '_id'] = result[0];
 
-			return knex(self._table + '_revision').transacting(t)
+			return knex(self._revision_table).transacting(t)
 				.insert(data, self._table + '_id');
 		});
 };
