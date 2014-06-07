@@ -8,44 +8,43 @@ html
 		block head
 	body
 		header.container
-			#header-logo
-				a.logo(href='/', title='BookBrainz')
-					strong BookBrainz
-
-			#search
-				form(action='/search', method='get').form-inline
-					input#search-query.form-control(name='query', placeholder='Query', type='text', value='')
-
-					select#search-type.form-control(name='type')
-						option(value='all') All
-						option(value='creator') Creator
-						option(value='book') Book
-						option(value='edition') Edition
-						option(value='work') Work
-						option(value='publisher') Publisher
-
-					button.btn.btn-default(type='submit')
-						span.glyphicon.glyphicon-search
-						.sr-only Search
-
 			nav.navbar.navbar-default(role='navigation')
 				.container-fluid
+					.navbar-header
+						a.navbar-brand(href='/') BookBrainz
+
 					ul.nav.navbar-nav
 						li.dropdown
-							a.dropdown-toggle(href='#', data-toggle='dropdown') Editing
+							a.dropdown-toggle(href='#', data-hover='dropdown') Edit
 							ul.dropdown-menu
 								li
 									a(href='/creator/create') Add Creator
 								li
 									a(href='/book/create') Add Book
 
+					#search
+						form(action='/search', method='get').navbar-form.navbar-left
+							input#search-query.form-control(name='query', placeholder='Search…', type='text', value='')
+
+							select#search-type.form-control(name='type')
+								option(value='all') All
+								option(value='creator') Creator
+								option(value='book') Book
+								option(value='edition') Edition
+								option(value='work') Work
+								option(value='publisher') Publisher
+
+							button.btn.btn-default(type='submit')
+								span.glyphicon.glyphicon-search
+								.sr-only Search
+
 					ul.nav.navbar-nav.navbar-right
 						if user
 							li.dropdown
-									a.dropdown-toggle(href='#', data-toggle='dropdown')= user.name
+									a.dropdown-toggle(href='/user/' + encodeURIComponent(user.name), data-hover='dropdown')= user.name
 									ul.dropdown-menu
 										li
-											a(href='/user/' + encodeURIComponent(user.name)) View Profile
+											a(href='#') Edit Profile
 						else
 							li
 								a(href='/login') Log In
@@ -54,7 +53,8 @@ html
 			#content.container
 				block content
 
-		script(type='text/javascript' src='/js/jquery-1.11.1.js')
+		script(type='text/javascript', src='/js/jquery-1.11.1.js')
 		script(type='text/javascript', src='/js/bootstrap-3.1.1.js')
+		script(type='text/javascript', src='/js/bootstrap-hover-dropdown.js')
 
 		block js
