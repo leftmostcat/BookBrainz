@@ -4,17 +4,21 @@ doctype html
 html
 	head
 		title= title
+		link(href='/css/bootstrap-3.1.1.css', rel='stylesheet')
+		link(href='/css/bootstrap-multiselect.css', rel='stylesheet')
 		block head
 	body
-		#header
+		header.container
 			#header-logo
-				a.logo(href='/' title='BookBrainz')
+				a.logo(href='/', title='BookBrainz')
 					strong BookBrainz
-				div
-					form(action='/search', method='get')
-						input#headerid-query(name='query', placeholder='Query', type='text', value='')
 
-						select#headerid-type(name='type')
+			#search.input-group
+				form(action='/search', method='get')
+					input#search-query.form-control(name='query', placeholder='Query', type='text', value='')
+
+					.input-group-btn
+						select#search-type.multiselect.btn.btn-default.dropdown-toggle(name='type')
 							option(value='all') All
 							option(value='creator') Creator
 							option(value='book') Book
@@ -22,11 +26,43 @@ html
 							option(value='work') Work
 							option(value='publisher') Publisher
 
-						span.buttons.inline
-							button(type='submit') Search
+						button.btn.btn-default(type='submit')
+							span.glyphicon.glyphicon-search
+							.sr-only Search
+
+			nav.navbar.navbar-default(role='navigation')
+				.container-fluid
+					ul.nav.navbar-nav
+						li.dropdown
+							a.dropdown-toggle(href='#', data-toggle='dropdown') Editing
+							ul.dropdown-menu
+								li
+									a(href='/creator/create') Add Creator
+								li
+									a(href='/book/create') Add Book
+
+					ul.nav.navbar-nav.navbar-right
+						if user
+							li.dropdown
+									a.dropdown-toggle(href='#', data-toggle='dropdown')= user.name
+									ul.dropdown-menu
+										li
+											a(href='/user/' + encodeURIComponent(user.name)) View Profile
+						else
+							li
+								a(href='/login') Log In
 
 		#page
-			#content
+			#content.container
 				block content
+
+		script(type='text/javascript' src='/js/jquery-1.11.1.js')
+		script(type='text/javascript', src='/js/bootstrap-3.1.1.js')
+		script(type='text/javascript', src='/js/bootstrap-multiselect.js')
+
+		script(type='text/javascript').
+			$(document).ready(function() {
+				$('.multiselect').multiselect();
+			});
 
 		block js

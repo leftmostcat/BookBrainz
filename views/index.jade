@@ -5,10 +5,3 @@ extends layout
 block content
 	h1 Welcome to BookBrainz!
 	p BookBrainz is an open book encyclopedia that collects book metadata and makes it available to the public.
-
-	if books
-		each book in books
-			a(href='/book/' + book.bbid)= book.title
-
-	a(href='/book/create') Add a Book
-	a(href='/creator/create') Add a Creator
