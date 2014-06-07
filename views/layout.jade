@@ -5,7 +5,6 @@ html
 	head
 		title= title
 		link(href='/css/bootstrap-3.1.1.css', rel='stylesheet')
-		link(href='/css/bootstrap-multiselect.css', rel='stylesheet')
 		block head
 	body
 		header.container
@@ -13,22 +12,21 @@ html
 				a.logo(href='/', title='BookBrainz')
 					strong BookBrainz
 
-			#search.input-group
-				form(action='/search', method='get')
+			#search
+				form(action='/search', method='get').form-inline
 					input#search-query.form-control(name='query', placeholder='Query', type='text', value='')
 
-					.input-group-btn
-						select#search-type.multiselect.btn.btn-default.dropdown-toggle(name='type')
-							option(value='all') All
-							option(value='creator') Creator
-							option(value='book') Book
-							option(value='edition') Edition
-							option(value='work') Work
-							option(value='publisher') Publisher
+					select#search-type.form-control(name='type')
+						option(value='all') All
+						option(value='creator') Creator
+						option(value='book') Book
+						option(value='edition') Edition
+						option(value='work') Work
+						option(value='publisher') Publisher
 
-						button.btn.btn-default(type='submit')
-							span.glyphicon.glyphicon-search
-							.sr-only Search
+					button.btn.btn-default(type='submit')
+						span.glyphicon.glyphicon-search
+						.sr-only Search
 
 			nav.navbar.navbar-default(role='navigation')
 				.container-fluid
@@ -58,11 +56,5 @@ html
 
 		script(type='text/javascript' src='/js/jquery-1.11.1.js')
 		script(type='text/javascript', src='/js/bootstrap-3.1.1.js')
-		script(type='text/javascript', src='/js/bootstrap-multiselect.js')
-
-		script(type='text/javascript').
-			$(document).ready(function() {
-				$('.multiselect').multiselect();
-			});
 
 		block js
