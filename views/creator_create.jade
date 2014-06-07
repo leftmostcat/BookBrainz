@@ -3,37 +3,36 @@
 extends layout
 
 block content
-	form(action='/creator/add', method='post')
-		dl
-			dt Name:
-			dd
-				input(type='text', name='name')
+	form(action='/creator/add', method='post', role='form')
+		.form-group
+			label(for='name') Name:
+			input#name.form-control(type='text', name='name')
 
-			dt Sort Name:
-			dd
-				input(type='text', name='sort_name')
+		.form-group
+			label(for='sort-name') Sort Name:
+			input#sort-name.form-control(type='text', name='sort_name')
 
-			dt Type:
-			dd
-				select(name='creator_type_id')
-					option(value='1') Person
+		.form-group
+			label(for='type') Type:
+			select#type.form-control(name='creator_type_id')
+				option(value='1') Person
 
-			dt Country:
-			dd
-				select(name='country_id')
-					option(value='1') United States
+		.form-group
+			label(for='country') Country:
+			select#country.form-control(name='country_id')
+				option(value='1') United States
 
-			dt Gender:
-			dd
-				select(name='gender_id')
-					option(value='1') Male
+		.form-group
+			label(for='gender') Gender:
+			select#gender.form-control(name='gender_id')
+				option(value='1') Male
 
-			dt Comment:
-			dd
-				textarea(name='comment')
+		.form-group
+			label(for='comment') Disambiguation:
+			textarea#comment.form-control(name='comment')
 
-			dt Ended:
-			dd
-				input(type='checkbox', name='ended')
+		.form-group.checkbox
+			input#ended(type='checkbox', name='ended')
+			label(for='ended') Ended
 
-			input(type='submit', value='Add Creator')
+		button.btn.btn-default(type='submit') Add Creator

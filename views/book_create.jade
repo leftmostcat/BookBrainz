@@ -3,33 +3,33 @@
 extends layout
 
 block head
-	link(rel='stylesheet', href='/css/select2-3.4.8.css')
+	link(href='/css/select2-3.4.8.css', rel='stylesheet')
+	link(href='/css/select2-bootstrap.css', rel='stylesheet')
 
 block content
-	form(action='/book/add', method='post')
-		dl
-			dt Title:
-			dd
-				input(type='text', name='title')
+	form(action='/book/add', method='post', role='form')
+		.form-group
+			label(for='title') Title:
+			input#title.form-control(type='text', name='title')
 
-			dt Creator:
-			dd
-				input#creator(type='hidden', name='creator_id', style='width: 200px;')
+		.form-group
+			label(for='creator') Creator:
+			input#creator.form-control.select2(type='hidden', name='creator_id')
 
-			dt Creator Credit:
-			dd
-				input(type='text', name='creator_name')
+		.form-group
+			label(for='credit') Creator Credit:
+			input#credit.form-control(type='text', name='creator_name')
 
-			dt Primary Type:
-			dd
-				select(name='book_primary_type_id')
-					option(value='1') Book
+		.form-group
+			label(for='primary-type') Primary Type:
+			select#primary-type.form-control(name='book_primary_type_id')
+				option(value='1') Book
 
-			dt Comment:
-			dd
-				textarea(name='comment')
+		.form-group
+			label(for='comment') Disambiguation:
+			textarea#comment.form-control(name='comment')
 
-			input(type='submit', value='Add Book')
+		button.btn.btn-default(type='submit') Add Book
 
 block js
 	script(type='text/javascript' src='/js/select2-3.4.8.js')
