@@ -7,7 +7,10 @@ var auth = require('../lib/auth');
 var Edition = require('../data/edition');
 
 router.get('/create', auth.isAuthenticated, function(req, res) {
-	res.render('edition_create', { title: 'Add Edition – BookBrainz' });
+	res.render('edition_create', {
+		title: 'Add Edition – BookBrainz',
+		user: req.user
+	});
 });
 
 router.post('/add', auth.isAuthenticated, function(req, res, next) {
@@ -44,7 +47,10 @@ router.get('/:bbid', function(req, res, next) {
 			if (!res.locals.edition)
 				return next();
 
-			res.render('edition', { title: '“' + res.locals.edition.name + '” – BookBrainz' });
+			res.render('edition', {
+				title: '“' + res.locals.edition.name + '” – BookBrainz',
+				user: req.user
+			});
 		})
 		.catch(function(err) {
 			return next(err);

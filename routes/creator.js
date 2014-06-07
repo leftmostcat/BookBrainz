@@ -7,7 +7,10 @@ var auth = require('../lib/auth');
 var Creator = require('../data/creator');
 
 router.get('/create', auth.isAuthenticated, function(req, res) {
-	res.render('creator_create', { title: 'Add Creator – BookBrainz' });
+	res.render('creator_create', {
+		title: 'Add Creator – BookBrainz',
+		user: req.user
+	});
 });
 
 router.post('/add', auth.isAuthenticated, function(req, res, next) {
@@ -47,7 +50,10 @@ router.get('/:bbid', function(req, res, next) {
 			if (!res.locals.creator)
 				return next();
 
-			res.render('creator', { title: res.locals.creator.name + ' – BookBrainz' });
+			res.render('creator', {
+				title: res.locals.creator.name + ' – BookBrainz',
+				user: req.user
+			});
 		})
 		.catch(function(err) {
 			return next(err);

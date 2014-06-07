@@ -11,7 +11,10 @@ router.get('/', function(req, res, next) {
 	search.find_by_name(req.param('query'), type)
 		.then(function(results) {
 			res.locals.results = results;
-			res.render('search', { title: 'Search Results – BookBrainz' });
+			res.render('search', {
+				title: 'Search Results – BookBrainz',
+				user: req.user
+			});
 		})
 		.catch(function(err) {
 			return next(err);
