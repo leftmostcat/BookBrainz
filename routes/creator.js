@@ -30,9 +30,7 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 		}
 	};
 
-	var creator = new Creator();
-
-	creator.insert(data)
+	Creator.insert(data)
 		.then(function(result) {
 			res.redirect('/creator/' + result);
 		})
@@ -42,17 +40,12 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 });
 
 router.get('/:bbid', function(req, res, next) {
-	var creator = new Creator();
-
-	creator.get_by_id(req.params.bbid)
+	Creator.get_by_id(req.params.bbid)
 		.then(function(results) {
 			res.locals.creator = results[0];
 
-			if (!res.locals.creator) {
-				var err = new Error('Not Found');
-				err.status = 404;
-				return next(err);
-			}
+			if (!res.locals.creator)
+				return next();
 
 			res.render('creator', { title: res.locals.creator.name + ' – BookBrainz' });
 		})

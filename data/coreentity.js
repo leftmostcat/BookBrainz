@@ -1,12 +1,15 @@
 /* vim: set ts=4 sw=4 : */
 
-var knex = require('knex').knex;
-var util = require('util');
+var _ = require('underscore'),
+	knex = require('knex').knex;
 
-var super_ = require('./entity');
+var Entity = require('./entity');
 
-function CoreEntity() {
-	CoreEntity.super_.call(this);
+var CoreEntity = {};
+_.extend(CoreEntity, Entity);
+
+CoreEntity.register = function() {
+	Entity.register.call(this);
 
 	this._data_table = this._table + '_data';
 	this._tree_table = this._table + '_tree';
@@ -31,20 +34,18 @@ function CoreEntity() {
 		make_left_join(this._tree_table, this._revision_table),
 		make_left_join(this._data_table, this._tree_table)
 	];
-}
+};
 
-util.inherits(CoreEntity, super_);
+CoreEntity._build_search_body = function(data) {
+	var body = Entity._build_search_body.call(this, data);
 
-CoreEntity.prototype._build_search_body = function(data) {
-	var body = {
-		name: data.entity_data.name,
-		comment: data.entity_data.comment
-	};
+	body.name = data.entity_data.name;
+	body.comment = data.entity_data.comment;
 
 	return body;
 };
 
-CoreEntity.prototype._insert_with_transaction = function(data, t) {
+CoreEntity._insert_with_transaction = function(data, t) {
 	var self = this;
 	var revision_id, entity_id;
 

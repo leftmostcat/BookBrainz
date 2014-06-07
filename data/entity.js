@@ -1,16 +1,18 @@
 /* vim: set ts=4 sw=4 : */
 
-var knex = require('knex').knex;
-var search = require('../lib/search');
+var knex = require('knex').knex,
+	search = require('../lib/search');
 
-function Entity() {}
+var Entity = {};
 
-Entity.prototype._columns = [];
-Entity.prototype._table = undefined;
-Entity.prototype._joins = [];
-Entity.prototype._id_column = 'id';
+Entity.register = function() {};
 
-Entity.prototype.get_by_id = function(id) {
+Entity._columns = [];
+Entity._table = undefined;
+Entity._joins = [];
+Entity._id_column = 'id';
+
+Entity.get_by_id = function(id) {
 	var query = knex(this._table);
 
 	this._joins.forEach(function(join) {
@@ -20,10 +22,12 @@ Entity.prototype.get_by_id = function(id) {
 	return query.select(this._columns).where(this._id_column, id);
 };
 
-Entity.prototype._build_search_body = undefined;
+Entity._build_search_body = function() {
+	return {};
+};
 
-Entity.prototype._insert_with_transaction = undefined;
-Entity.prototype.insert = function(data, t) {
+Entity._insert_with_transaction = function() {};
+Entity.insert = function(data, t) {
 	var self = this;
 	var promise;
 
@@ -53,8 +57,8 @@ Entity.prototype.insert = function(data, t) {
 	});
 };
 
-Entity.prototype.update = function() {};
-Entity.prototype.delete = function() {};
-Entity.prototype.merge = function() {};
+Entity.update = function() {};
+Entity.remove = function() {};
+Entity.merge = function() {};
 
 module.exports = Entity;

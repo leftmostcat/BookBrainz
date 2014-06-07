@@ -1,20 +1,17 @@
 /* vim: set ts=4 sw=4 : */
 
-var Promise = require('bluebird');
-var knex = require('knex').knex;
-var util = require('util');
+var Promise = require('bluebird'),
+	_ = require('underscore'),
+	knex = require('knex').knex;
 
-var super_ = require('./coreentity');
+var CoreEntity = require('./coreentity');
 
-function Book() {
-	Book.super_.call(this);
-}
+var Book = {};
+_.extend(Book, CoreEntity);
 
-util.inherits(Book, super_);
-
-Book.prototype._table = 'book';
-Book.prototype._id_column = 'book.book_id';
-Book.prototype._columns = [
+Book._table = 'book';
+Book._id_column = 'book.book_id';
+Book._columns = [
 	'book.book_id',
 	'book_data.name',
 	'book_data.creator_credit_id',
@@ -22,8 +19,8 @@ Book.prototype._columns = [
 	'book_data.comment'
 ];
 
-Book.prototype._build_search_body = function(data) {
-	var body = Book.super_.prototype._build_search_body.call(this, data);
+Book._build_search_body = function(data) {
+	var body = CoreEntity._build_search_body.call(this, data);
 
 	var creator_credit = data.pre_phrase;
 
@@ -40,7 +37,7 @@ Book.prototype._build_search_body = function(data) {
 	return body;
 };
 
-Book.prototype._insert_with_transaction = function(data, t) {
+Book._insert_with_transaction = function(data, t) {
 	var self = this;
 
 	return knex('creator_credit').transacting(t).insert({ pre_phrase: data.pre_phrase }, 'creator_credit_id')
@@ -58,8 +55,9 @@ Book.prototype._insert_with_transaction = function(data, t) {
 			});
 		})
 		.then(function() {
-			return Book.super_.prototype._insert_with_transaction.call(self, data, t);
+			return CoreEntity._insert_with_transaction.call(self, data, t);
 		});
 };
 
+Book.register();
 module.exports = Book;

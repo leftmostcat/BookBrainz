@@ -1,28 +1,25 @@
 /* vim: set ts=4 sw=4 : */
 
-var knex = require('knex').knex;
-var util = require('util');
+var _ = require('underscore'),
+	knex = require('knex').knex;
 
-var super_ = require('./entity');
+var Entity = require('./entity');
 
-function Editor() {
-	Editor.super_.call(this);
-}
+var Editor = {};
+_.extend(Editor, Entity);
 
-util.inherits(Editor, super_);
-
-Editor.prototype._table = 'editor';
-Editor.prototype._columns = [
+Editor._table = 'editor';
+Editor._columns = [
 	'editor.id',
 	'editor.name',
 	'editor.email'
 ];
 
-Editor.prototype.get_by_name = function(name) {
+Editor.get_by_name = function(name) {
 	return knex(this._table).limit(1).select(this._columns).where('name', name);
 };
 
-Editor.prototype.insert = function(data) {
+Editor.insert = function(data) {
 	var self = this;
 
 	return knex.transaction(function(t) {
@@ -35,4 +32,5 @@ Editor.prototype.insert = function(data) {
 	});
 };
 
+Editor.register();
 module.exports = Editor;

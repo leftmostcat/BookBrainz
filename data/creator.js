@@ -1,18 +1,15 @@
 /* vim: set ts=4 sw=4 : */
 
-var util = require('util');
+var _ = require('underscore');
 
-var super_ = require('./coreentity');
+var CoreEntity = require('./coreentity');
 
-function Creator() {
-	Creator.super_.call(this);
-}
+var Creator = {};
+_.extend(Creator, CoreEntity);
 
-util.inherits(Creator, super_);
-
-Creator.prototype._table = 'creator';
-Creator.prototype._id_column = 'creator.creator_id';
-Creator.prototype._columns = [
+Creator._table = 'creator';
+Creator._id_column = 'creator.creator_id';
+Creator._columns = [
 	'creator.creator_id',
 	'creator_data.name',
 	'creator_data.sort_name',
@@ -29,4 +26,5 @@ Creator.prototype._columns = [
 	'creator_data.ended'
 ];
 
+Creator.register();
 module.exports = Creator;

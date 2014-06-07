@@ -27,9 +27,7 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 		}
 	};
 
-	var book = new Book();
-
-	book.insert(data)
+	Book.insert(data)
 		.then(function(result) {
 			res.redirect('/book/' + result);
 		})
@@ -39,17 +37,12 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 });
 
 router.get('/:bbid', function(req, res, next) {
-	var book = new Book();
-
-	book.get_by_id(req.params.bbid)
+	Book.get_by_id(req.params.bbid)
 		.then(function(results) {
 			res.locals.book = results[0];
 
-			if (!res.locals.book) {
-				var err = new Error('Not Found');
-				err.status = 404;
-				return next(err);
-			}
+			if (!res.locals.book)
+				return next();
 
 			res.render('book', { title: '“' + res.locals.book.name + '” – BookBrainz' });
 		})
