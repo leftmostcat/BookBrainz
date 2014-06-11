@@ -6,6 +6,14 @@ var router = express.Router();
 var auth = require('../lib/auth');
 var Creator = require('../data/creator');
 
+router.param('bbid', function(req, res, next, bbid) {
+	Creator.get_by_id(bbid)
+		.then(function(entity) {
+			res.locals.entity = entity;
+		})
+		.exec(next);
+});
+
 router.get('/create', auth.isAuthenticated, function(req, res) {
 	res.render('creator_create', {
 		title: 'Add Creator – BookBrainz',
@@ -43,21 +51,13 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 });
 
 router.get('/:bbid', function(req, res, next) {
-	Creator.get_by_id(req.params.bbid)
-		.then(function(result) {
-			if (!result)
-				return next();
+	if (!res.locals.entity)
+		return next();
 
-			res.locals.creator = result;
-
-			res.render('creator', {
-				title: res.locals.creator.name + ' – BookBrainz',
-				user: req.user
-			});
-		})
-		.catch(function(err) {
-			return next(err);
-		});
+	res.render('creator', {
+		title: res.locals.entity.name + ' – BookBrainz',
+		user: req.user
+	});
 });
 
 module.exports = router;

@@ -6,6 +6,14 @@ var router = express.Router();
 var auth = require('../lib/auth');
 var Book = require('../data/book');
 
+router.param('bbid', function(req, res, next, bbid) {
+	Book.get_by_id(bbid)
+		.then(function(entity) {
+			res.locals.entity = entity;
+		})
+		.exec(next);
+});
+
 router.get('/create', auth.isAuthenticated, function(req, res) {
 	res.render('book_create', {
 		title: 'Add Book – BookBrainz',
@@ -40,21 +48,13 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 });
 
 router.get('/:bbid', function(req, res, next) {
-	Book.get_by_id(req.params.bbid)
-		.then(function(result) {
-			if (!result)
-				return next();
+	if (!res.locals.entity)
+		return next();
 
-			res.locals.book = result;
-
-			res.render('book', {
-				title: '“' + res.locals.book.name + '” – BookBrainz',
-				user: req.user
-			});
-		})
-		.catch(function(err) {
-			return next(err);
-		});
+	res.render('book', {
+		title: '“' + res.locals.entity.name + '” – BookBrainz',
+		user: req.user
+	});
 });
 
 module.exports = router;
