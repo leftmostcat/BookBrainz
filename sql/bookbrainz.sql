@@ -1061,6 +1061,7 @@ CREATE TABLE edition_data (
     edition_data_id integer NOT NULL,
     name non_empty_presentational_text NOT NULL,
     creator_credit_id integer NOT NULL,
+    book_id uuid NOT NULL,
     edition_status_id integer,
     country_id integer,
     language_id integer,
@@ -2602,6 +2603,13 @@ ALTER TABLE ONLY publisher_revision
 
 ALTER TABLE ONLY publisher_tree
     ADD CONSTRAINT publisher_tree_publisher_data_id_fkey FOREIGN KEY (publisher_data_id) REFERENCES publisher_data(publisher_data_id);
+
+--
+-- Name: edition_data_country_id_fkey; Type: FK CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz
+--
+
+ALTER TABLE ONLY edition_data
+    ADD CONSTRAINT edition_data_book_id_fkey FOREIGN KEY (book_id) REFERENCES book(book_id);
 
 --
 -- Name: edition_data_country_id_fkey; Type: FK CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz

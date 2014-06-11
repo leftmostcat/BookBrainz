@@ -15,6 +15,7 @@ Edition._columns = [
 	'edition.edition_id',
 	'edition_data.name',
 	'edition_data.creator_credit_id',
+	'edition_data.book_id',
 	'edition_data.edition_status_id',
 	'edition_data.country_id',
 	'edition_data.language_id',
