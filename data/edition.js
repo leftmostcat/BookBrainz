@@ -26,6 +26,13 @@ Edition._columns = [
 	'edition_data.comment'
 ];
 
+Edition.get_by_id = function(id) {
+	var edition = CoreEntity.get_by_id.call(this, id);
+	edition.creator_credit = CreatorCredit.get_by_id(edition.creator_credit_id);
+
+	return edition;
+};
+
 Edition._build_search_body = function(data) {
 	var body = CoreEntity._build_search_body.call(this, data);
 

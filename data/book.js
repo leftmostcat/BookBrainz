@@ -19,6 +19,13 @@ Book._columns = [
 	'book_data.comment'
 ];
 
+Book.get_by_id = function(id) {
+	var book = CoreEntity.get_by_id.call(this, id);
+	book.creator_credit = CreatorCredit.get_by_id(book.creator_credit_id);
+
+	return book;
+};
+
 Book._build_search_body = function(data) {
 	var body = CoreEntity._build_search_body.call(this, data);
 
