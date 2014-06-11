@@ -1,10 +1,10 @@
 /* vim: set ts=4 sw=4 : */
 
-var Promise = require('bluebird'),
-	_ = require('underscore'),
-	knex = require('knex').knex;
+var _ = require('underscore');
 
 var CoreEntity = require('./coreentity');
+
+var CreatorCredit = require('./creator-credit');
 
 var Edition = {};
 _.extend(Edition, CoreEntity);
@@ -47,21 +47,9 @@ Edition._build_search_body = function(data) {
 Edition._insert_with_transaction = function(data, t) {
 	var self = this;
 
-	return knex('creator_credit').transacting(t).insert({ pre_phrase: data.pre_phrase }, 'creator_credit_id')
+	return CreatorCredit.insert(data, t)
 		.then(function(result) {
-			data.entity_data.creator_credit_id = result[0];
-
-			return Promise.map(data.credits, function(credit) {
-				return knex('creator_credit_name').transacting(t).insert({
-					creator_credit_id: result[0],
-					position: credit.position,
-					creator_id: credit.id,
-					name: credit.name,
-					join_phrase: credit.join_phrase
-				});
-			});
-		})
-		.then(function() {
+			data.entity_data.creator_credit_id = result;
 			return CoreEntity._insert_with_transaction.call(self, data, t);
 		});
 };
