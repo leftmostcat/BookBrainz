@@ -32,8 +32,13 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 			join_phrase: ''
 		}],
 		entity_data: {
-			name: req.param('title'),
-			book_type_id: req.param('book_primary_type_id'),
+			name: req.param('name'),
+			book_id: req.param('book_id'),
+			edition_status_id: req.param('edition_status_id'),
+			country_id: req.param('country_id'),
+			language_id: req.param('language_id'),
+			script_id: req.param('script_id'),
+			barcode: req.param('barcode'),
 			comment: req.param('comment')
 		}
 	};
