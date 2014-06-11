@@ -373,7 +373,7 @@ CREATE FUNCTION find_or_insert_work_data(in_name text, in_comment text, in_type_
     SELECT work_data_id INTO found_id
     FROM work_data
     WHERE name = in_name AND comment = in_comment AND
-      work_type_id IS NOT DISTINCT FROM in_type_id AND    
+      work_type_id IS NOT DISTINCT FROM in_type_id AND
       language_id IS NOT DISTINCT FROM in_language_id;
 
     IF FOUND
@@ -396,7 +396,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: creator; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator (
@@ -409,7 +409,7 @@ CREATE TABLE creator (
 ALTER TABLE bookbrainz.creator OWNER TO bookbrainz;
 
 --
--- Name: creator_credit; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_credit; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator_credit (
@@ -442,7 +442,7 @@ ALTER SEQUENCE creator_credit_creator_credit_id_seq OWNED BY creator_credit.crea
 
 
 --
--- Name: creator_credit_name; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_credit_name; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator_credit_name (
@@ -457,7 +457,7 @@ CREATE TABLE creator_credit_name (
 ALTER TABLE bookbrainz.creator_credit_name OWNER TO bookbrainz;
 
 --
--- Name: creator_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator_data (
@@ -501,7 +501,7 @@ ALTER TABLE bookbrainz.creator_data_creator_data_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE creator_data_creator_data_id_seq OWNED BY creator_data.creator_data_id;
 
 --
--- Name: creator_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator_revision (
@@ -514,7 +514,7 @@ CREATE TABLE creator_revision (
 ALTER TABLE bookbrainz.creator_revision OWNER TO bookbrainz;
 
 --
--- Name: creator_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator_tree (
@@ -548,7 +548,7 @@ ALTER SEQUENCE creator_tree_id_seq OWNED BY creator_tree.creator_tree_id;
 
 
 --
--- Name: creator_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE creator_type (
@@ -580,7 +580,7 @@ ALTER TABLE bookbrainz.creator_type_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE creator_type_id_seq OWNED BY creator_type.id;
 
 --
--- Name: country; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: country; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE country (
@@ -614,7 +614,7 @@ ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
--- Name: edit; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit (
@@ -626,7 +626,7 @@ CREATE TABLE edit (
 ALTER TABLE bookbrainz.edit OWNER TO bookbrainz;
 
 --
--- Name: edit_creator; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_creator; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_creator (
@@ -659,7 +659,7 @@ ALTER SEQUENCE edit_edit_id_seq OWNED BY edit.edit_id;
 
 
 --
--- Name: edit_publisher; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_publisher; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_publisher (
@@ -671,7 +671,7 @@ CREATE TABLE edit_publisher (
 ALTER TABLE bookbrainz.edit_publisher OWNER TO bookbrainz;
 
 --
--- Name: edit_note; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_note; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_note (
@@ -705,7 +705,7 @@ ALTER TABLE bookbrainz.edit_note_edit_note_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE edit_note_edit_note_id_seq OWNED BY edit_note.edit_note_id;
 
 --
--- Name: edit_edition; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_edition; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_edition (
@@ -717,7 +717,7 @@ CREATE TABLE edit_edition (
 ALTER TABLE bookbrainz.edit_edition OWNER TO bookbrainz;
 
 --
--- Name: edit_book; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_book; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_book (
@@ -729,7 +729,7 @@ CREATE TABLE edit_book (
 ALTER TABLE bookbrainz.edit_book OWNER TO bookbrainz;
 
 --
--- Name: edit_url; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_url; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_url (
@@ -741,7 +741,7 @@ CREATE TABLE edit_url (
 ALTER TABLE bookbrainz.edit_url OWNER TO bookbrainz;
 
 --
--- Name: edit_work; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_work; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edit_work (
@@ -753,7 +753,7 @@ CREATE TABLE edit_work (
 ALTER TABLE bookbrainz.edit_work OWNER TO bookbrainz;
 
 --
--- Name: editor; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: editor; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE editor (
@@ -801,7 +801,7 @@ ALTER SEQUENCE editor_id_seq OWNED BY editor.id;
 
 
 --
--- Name: editor_preference; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: editor_preference; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE editor_preference (
@@ -836,7 +836,7 @@ ALTER SEQUENCE editor_preference_id_seq OWNED BY editor_preference.id;
 
 
 --
--- Name: gender; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: gender; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE gender (
@@ -868,7 +868,7 @@ ALTER TABLE bookbrainz.gender_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE gender_id_seq OWNED BY gender.id;
 
 --
--- Name: publisher; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE publisher (
@@ -881,7 +881,7 @@ CREATE TABLE publisher (
 ALTER TABLE bookbrainz.publisher OWNER TO bookbrainz;
 
 --
--- Name: publisher_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE publisher_data (
@@ -924,7 +924,7 @@ ALTER TABLE bookbrainz.publisher_data_publisher_data_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE publisher_data_publisher_data_id_seq OWNED BY publisher_data.publisher_data_id;
 
 --
--- Name: publisher_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE publisher_revision (
@@ -937,7 +937,7 @@ CREATE TABLE publisher_revision (
 ALTER TABLE bookbrainz.publisher_revision OWNER TO bookbrainz;
 
 --
--- Name: publisher_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE publisher_tree (
@@ -971,7 +971,7 @@ ALTER SEQUENCE publisher_tree_publisher_tree_id_seq OWNED BY publisher_tree.publ
 
 
 --
--- Name: publisher_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE publisher_type (
@@ -1004,7 +1004,7 @@ ALTER SEQUENCE publisher_type_id_seq OWNED BY publisher_type.id;
 
 
 --
--- Name: language; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE language (
@@ -1041,7 +1041,7 @@ ALTER TABLE bookbrainz.language_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE language_id_seq OWNED BY language.id;
 
 --
--- Name: edition; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edition (
@@ -1054,7 +1054,7 @@ CREATE TABLE edition (
 ALTER TABLE bookbrainz.edition OWNER TO bookbrainz;
 
 --
--- Name: edition_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edition_data (
@@ -1097,7 +1097,7 @@ ALTER SEQUENCE edition_data_edition_data_id_seq OWNED BY edition_data.edition_da
 
 
 --
--- Name: book; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE book (
@@ -1110,7 +1110,7 @@ CREATE TABLE book (
 ALTER TABLE bookbrainz.book OWNER TO bookbrainz;
 
 --
--- Name: book_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE book_data (
@@ -1146,7 +1146,7 @@ ALTER SEQUENCE book_data_book_data_id_seq OWNED BY book_data.book_data_id;
 
 
 --
--- Name: book_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE book_type (
@@ -1178,7 +1178,7 @@ ALTER TABLE bookbrainz.book_type_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE book_type_id_seq OWNED BY book_type.id;
 
 --
--- Name: book_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE book_revision (
@@ -1205,7 +1205,7 @@ CREATE SEQUENCE book_tree_book_tree_id_seq
 ALTER TABLE bookbrainz.book_tree_book_tree_id_seq OWNER TO bookbrainz;
 
 --
--- Name: book_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE book_tree (
@@ -1218,7 +1218,7 @@ CREATE TABLE book_tree (
 ALTER TABLE bookbrainz.book_tree OWNER TO bookbrainz;
 
 --
--- Name: edition_publisher; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_publisher; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edition_publisher (
@@ -1231,7 +1231,7 @@ CREATE TABLE edition_publisher (
 ALTER TABLE bookbrainz.edition_publisher OWNER TO bookbrainz;
 
 --
--- Name: edition_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edition_revision (
@@ -1244,7 +1244,7 @@ CREATE TABLE edition_revision (
 ALTER TABLE bookbrainz.edition_revision OWNER TO bookbrainz;
 
 --
--- Name: edition_status; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_status; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edition_status (
@@ -1276,7 +1276,7 @@ ALTER TABLE bookbrainz.edition_status_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE edition_status_id_seq OWNED BY edition_status.id;
 
 --
--- Name: edition_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE edition_tree (
@@ -1311,7 +1311,7 @@ ALTER SEQUENCE edition_tree_edition_tree_id_seq OWNED BY edition_tree.edition_tr
 
 
 --
--- Name: revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE revision (
@@ -1324,7 +1324,7 @@ CREATE TABLE revision (
 ALTER TABLE bookbrainz.revision OWNER TO bookbrainz;
 
 --
--- Name: revision_parent; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: revision_parent; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE revision_parent (
@@ -1368,7 +1368,7 @@ ALTER SEQUENCE revision_revision_id_seq OWNED BY revision.revision_id;
 
 
 --
--- Name: script; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE script (
@@ -1404,7 +1404,7 @@ ALTER SEQUENCE script_id_seq OWNED BY script.id;
 
 
 --
--- Name: script_language; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_language; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE script_language (
@@ -1438,7 +1438,7 @@ ALTER TABLE bookbrainz.script_language_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE script_language_id_seq OWNED BY script_language.id;
 
 --
--- Name: url; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE url (
@@ -1451,7 +1451,7 @@ CREATE TABLE url (
 ALTER TABLE bookbrainz.url OWNER TO bookbrainz;
 
 --
--- Name: url_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE url_data (
@@ -1485,7 +1485,7 @@ ALTER SEQUENCE url_data_url_data_id_seq OWNED BY url_data.url_data_id;
 
 
 --
--- Name: url_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE url_revision (
@@ -1498,7 +1498,7 @@ CREATE TABLE url_revision (
 ALTER TABLE bookbrainz.url_revision OWNER TO bookbrainz;
 
 --
--- Name: url_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE url_tree (
@@ -1532,7 +1532,7 @@ ALTER SEQUENCE url_tree_id_seq OWNED BY url_tree.url_tree_id;
 
 
 --
--- Name: vote; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: vote; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE vote (
@@ -1547,7 +1547,7 @@ CREATE TABLE vote (
 ALTER TABLE bookbrainz.vote OWNER TO bookbrainz;
 
 --
--- Name: work; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE work (
@@ -1560,7 +1560,7 @@ CREATE TABLE work (
 ALTER TABLE bookbrainz.work OWNER TO bookbrainz;
 
 --
--- Name: work_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_data; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE work_data (
@@ -1595,7 +1595,7 @@ ALTER TABLE bookbrainz.work_data_work_data_id_seq OWNER TO bookbrainz;
 ALTER SEQUENCE work_data_work_data_id_seq OWNED BY work_data.work_data_id;
 
 --
--- Name: work_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_revision; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE work_revision (
@@ -1608,7 +1608,7 @@ CREATE TABLE work_revision (
 ALTER TABLE bookbrainz.work_revision OWNER TO bookbrainz;
 
 --
--- Name: work_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_tree; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE work_tree (
@@ -1642,7 +1642,7 @@ ALTER SEQUENCE work_tree_id_seq OWNED BY work_tree.work_tree_id;
 
 
 --
--- Name: work_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_type; Type: TABLE; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE TABLE work_type (
@@ -1855,7 +1855,7 @@ ALTER TABLE ONLY work_tree ALTER COLUMN work_tree_id SET DEFAULT nextval('work_t
 ALTER TABLE ONLY work_type ALTER COLUMN id SET DEFAULT nextval('work_type_id_seq'::regclass);
 
 --
--- Name: creator_credit_name_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_credit_name_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_credit_name
@@ -1863,7 +1863,7 @@ ALTER TABLE ONLY creator_credit_name
 
 
 --
--- Name: creator_credit_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_credit_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_credit
@@ -1871,28 +1871,28 @@ ALTER TABLE ONLY creator_credit
 
 
 --
--- Name: creator_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_data
     ADD CONSTRAINT creator_data_pkey PRIMARY KEY (creator_data_id);
 
 --
--- Name: creator_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator
     ADD CONSTRAINT creator_pkey PRIMARY KEY (creator_id);
 
 --
--- Name: creator_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_revision
     ADD CONSTRAINT creator_revision_pkey PRIMARY KEY (revision_id);
 
 --
--- Name: creator_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_tree
@@ -1900,7 +1900,7 @@ ALTER TABLE ONLY creator_tree
 
 
 --
--- Name: creator_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_type
@@ -1908,14 +1908,14 @@ ALTER TABLE ONLY creator_type
 
 
 --
--- Name: creator_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: creator_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY creator_type
     ADD CONSTRAINT creator_type_pkey PRIMARY KEY (name);
 
 --
--- Name: country_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: country_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY country
@@ -1923,7 +1923,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: country_name_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: country_name_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY country
@@ -1931,7 +1931,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: country_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: country_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY country
@@ -1939,7 +1939,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: edit_creator_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_creator_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edit_creator
@@ -1947,7 +1947,7 @@ ALTER TABLE ONLY edit_creator
 
 
 --
--- Name: edit_note_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_note_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edit_note
@@ -1955,7 +1955,7 @@ ALTER TABLE ONLY edit_note
 
 
 --
--- Name: edit_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edit_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edit
@@ -1963,7 +1963,7 @@ ALTER TABLE ONLY edit
 
 
 --
--- Name: editor_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: editor_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY editor
@@ -1971,7 +1971,7 @@ ALTER TABLE ONLY editor
 
 
 --
--- Name: editor_preference_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: editor_preference_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY editor_preference
@@ -1979,7 +1979,7 @@ ALTER TABLE ONLY editor_preference
 
 
 --
--- Name: gender_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: gender_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY gender
@@ -1987,35 +1987,35 @@ ALTER TABLE ONLY gender
 
 
 --
--- Name: gender_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: gender_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY gender
     ADD CONSTRAINT gender_pkey PRIMARY KEY (name);
 
 --
--- Name: publisher_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY publisher_data
     ADD CONSTRAINT publisher_data_pkey PRIMARY KEY (publisher_data_id);
 
 --
--- Name: publisher_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY publisher
     ADD CONSTRAINT publisher_pkey PRIMARY KEY (publisher_id);
 
 --
--- Name: publisher_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY publisher_revision
     ADD CONSTRAINT publisher_revision_pkey PRIMARY KEY (revision_id);
 
 --
--- Name: publisher_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY publisher_tree
@@ -2023,7 +2023,7 @@ ALTER TABLE ONLY publisher_tree
 
 
 --
--- Name: publisher_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY publisher_type
@@ -2031,7 +2031,7 @@ ALTER TABLE ONLY publisher_type
 
 
 --
--- Name: publisher_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: publisher_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY publisher_type
@@ -2039,7 +2039,7 @@ ALTER TABLE ONLY publisher_type
 
 
 --
--- Name: language_iso_code_1_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language_iso_code_1_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY language
@@ -2047,7 +2047,7 @@ ALTER TABLE ONLY language
 
 
 --
--- Name: language_iso_code_2b_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language_iso_code_2b_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY language
@@ -2055,7 +2055,7 @@ ALTER TABLE ONLY language
 
 
 --
--- Name: language_iso_code_2t_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language_iso_code_2t_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY language
@@ -2063,7 +2063,7 @@ ALTER TABLE ONLY language
 
 
 --
--- Name: language_iso_code_3_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language_iso_code_3_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY language
@@ -2071,7 +2071,7 @@ ALTER TABLE ONLY language
 
 
 --
--- Name: language_name_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language_name_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY language
@@ -2079,14 +2079,14 @@ ALTER TABLE ONLY language
 
 
 --
--- Name: language_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: language_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY language
     ADD CONSTRAINT language_pkey PRIMARY KEY (id);
 
 --
--- Name: edition_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition_data
@@ -2094,7 +2094,7 @@ ALTER TABLE ONLY edition_data
 
 
 --
--- Name: book_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY book_data
@@ -2102,7 +2102,7 @@ ALTER TABLE ONLY book_data
 
 
 --
--- Name: book_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY book
@@ -2110,7 +2110,7 @@ ALTER TABLE ONLY book
 
 
 --
--- Name: book_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY book_type
@@ -2118,35 +2118,35 @@ ALTER TABLE ONLY book_type
 
 
 --
--- Name: book_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY book_type
     ADD CONSTRAINT book_type_pkey PRIMARY KEY (name);
 
 --
--- Name: book_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY book_revision
     ADD CONSTRAINT book_revision_pkey PRIMARY KEY (revision_id);
 
 --
--- Name: book_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: book_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY book_tree
     ADD CONSTRAINT book_tree_pkey PRIMARY KEY (book_tree_id);
 
 --
--- Name: edition_publisher_edition_tree_id_publisher_id_catalog_number_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_publisher_edition_tree_id_publisher_id_catalog_number_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition_publisher
     ADD CONSTRAINT edition_publisher_edition_tree_id_publisher_id_catalog_number_key UNIQUE (edition_tree_id, publisher_id, catalog_number);
 
 --
--- Name: edition_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition
@@ -2154,7 +2154,7 @@ ALTER TABLE ONLY edition
 
 
 --
--- Name: edition_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition_revision
@@ -2162,7 +2162,7 @@ ALTER TABLE ONLY edition_revision
 
 
 --
--- Name: edition_status_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_status_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition_status
@@ -2170,14 +2170,14 @@ ALTER TABLE ONLY edition_status
 
 
 --
--- Name: edition_status_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_status_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition_status
     ADD CONSTRAINT edition_status_pkey PRIMARY KEY (name);
 
 --
--- Name: edition_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY edition_tree
@@ -2185,7 +2185,7 @@ ALTER TABLE ONLY edition_tree
 
 
 --
--- Name: revision_parent_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: revision_parent_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY revision_parent
@@ -2193,7 +2193,7 @@ ALTER TABLE ONLY revision_parent
 
 
 --
--- Name: revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY revision
@@ -2201,7 +2201,7 @@ ALTER TABLE ONLY revision
 
 
 --
--- Name: script_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY script
@@ -2209,7 +2209,7 @@ ALTER TABLE ONLY script
 
 
 --
--- Name: script_iso_number_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_iso_number_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY script
@@ -2217,7 +2217,7 @@ ALTER TABLE ONLY script
 
 
 --
--- Name: script_language_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_language_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY script_language
@@ -2225,7 +2225,7 @@ ALTER TABLE ONLY script_language
 
 
 --
--- Name: script_language_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_language_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY script_language
@@ -2233,7 +2233,7 @@ ALTER TABLE ONLY script_language
 
 
 --
--- Name: script_name_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_name_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY script
@@ -2241,14 +2241,14 @@ ALTER TABLE ONLY script
 
 
 --
--- Name: script_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: script_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY script
     ADD CONSTRAINT script_pkey PRIMARY KEY (iso_code);
 
 --
--- Name: url_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY url_data
@@ -2256,7 +2256,7 @@ ALTER TABLE ONLY url_data
 
 
 --
--- Name: url_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY url
@@ -2264,7 +2264,7 @@ ALTER TABLE ONLY url
 
 
 --
--- Name: url_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY url_revision
@@ -2272,35 +2272,35 @@ ALTER TABLE ONLY url_revision
 
 
 --
--- Name: url_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: url_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY url_tree
     ADD CONSTRAINT url_tree_pkey PRIMARY KEY (url_tree_id);
 
 --
--- Name: work_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_data_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY work_data
     ADD CONSTRAINT work_data_pkey PRIMARY KEY (work_data_id);
 
 --
--- Name: work_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY work
     ADD CONSTRAINT work_pkey PRIMARY KEY (work_id);
 
 --
--- Name: work_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_revision_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY work_revision
     ADD CONSTRAINT work_revision_pkey PRIMARY KEY (revision_id);
 
 --
--- Name: work_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_tree_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY work_tree
@@ -2308,7 +2308,7 @@ ALTER TABLE ONLY work_tree
 
 
 --
--- Name: work_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_type_id_key; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY work_type
@@ -2316,35 +2316,35 @@ ALTER TABLE ONLY work_type
 
 
 --
--- Name: work_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: work_type_pkey; Type: CONSTRAINT; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 ALTER TABLE ONLY work_type
     ADD CONSTRAINT work_type_pkey PRIMARY KEY (name);
 
 --
--- Name: editor_idx_name; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: editor_idx_name; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE UNIQUE INDEX editor_idx_name ON editor USING btree (lower((name)::text));
 
 
 --
--- Name: editor_preference_idx_editor_name; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: editor_preference_idx_editor_name; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE UNIQUE INDEX editor_preference_idx_editor_name ON editor_preference USING btree (editor, name);
 
 
 --
--- Name: edition_publisher_edition_tree_id_catalog_number_idx; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_publisher_edition_tree_id_catalog_number_idx; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE UNIQUE INDEX edition_publisher_edition_tree_id_catalog_number_idx ON edition_publisher USING btree (edition_tree_id, catalog_number) WHERE (publisher_id IS NULL);
 
 
 --
--- Name: edition_publisher_edition_tree_id_publisher_id_idx; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace: 
+-- Name: edition_publisher_edition_tree_id_publisher_id_idx; Type: INDEX; Schema: bookbrainz; Owner: bookbrainz; Tablespace:
 --
 
 CREATE UNIQUE INDEX edition_publisher_edition_tree_id_publisher_id_idx ON edition_publisher USING btree (edition_tree_id, publisher_id) WHERE (catalog_number IS NULL);
