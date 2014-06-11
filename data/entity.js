@@ -46,14 +46,13 @@ Entity.insert = function(data, t) {
 	return promise.then(function(result) {
 		var id = result[0];
 
+		var body = self._build_search_body(data);
+
 		// If indexing behavior is defined for this type, send it to search
-		if (self._build_search_body) {
-			var body = self._build_search_body(data);
-
+		if (body)
 			return search.index(self._table, id, body);
-		}
-
-		return id;
+		else
+			return id;
 	});
 };
 
