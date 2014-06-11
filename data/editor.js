@@ -19,17 +19,13 @@ Editor.get_by_name = function(name) {
 	return knex(this._table).first(this._columns).where('name', name);
 };
 
-Editor.insert = function(data) {
+Editor._insert_with_transaction = function(data, t) {
 	var self = this;
 
-	return knex.transaction(function(t) {
-		knex(self._table).transacting(t).insert({
-			name: data.name,
-			email: data.email
-		}, 'id')
-			.then(t.commit)
-			.catch(t.rollback);
-	});
+	return knex(self._table).transacting(t).insert({
+		name: data.name,
+		email: data.email
+	}, 'id');
 };
 
 Editor.register();
