@@ -7,8 +7,8 @@ var Entity = {};
 
 Entity.register = function() {};
 
-Entity._columns = [];
 Entity._table = undefined;
+Entity._columns = [];
 Entity._joins = [];
 Entity._id_column = 'id';
 
