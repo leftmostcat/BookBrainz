@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 
-var CoreEntity = require('./coreentity');
+var CoreEntity = require('./core-entity');
 
 var Creator = {};
 _.extend(Creator, CoreEntity);
