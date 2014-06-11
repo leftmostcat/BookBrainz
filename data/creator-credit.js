@@ -22,20 +22,17 @@ CreatorCredit._insert_with_transaction = function(data, t) {
 	return knex(self._table).transacting(t).insert({
 		pre_phrase: data.pre_phrase
 	}, 'creator_credit_id')
-		.then(function(result) {
-			// Return the creator credit ID as the first item in the result body
-			return Promise.all([
-				result[0],
-				Promise.map(data.credits, function(credit) {
-					return knex('creator_credit_name').transacting(t).insert({
-						creator_credit_id: result[0],
-						position: credit.position,
-						creator_id: credit.id,
-						name: credit.name,
-						join_phrase: credit.join_phrase
-					})
-				})
-			]);
+		.tap(function(result) {
+			// Add individual credits while still returning the ID
+			return Promise.map(data.credits, function(credit) {
+				return knex('creator_credit_name').transacting(t).insert({
+					creator_credit_id: result[0],
+					position: credit.position,
+					creator_id: credit.id,
+					name: credit.name,
+					join_phrase: credit.join_phrase
+				});
+			});
 		});
 };
 
