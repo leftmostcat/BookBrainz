@@ -44,11 +44,11 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 
 router.get('/:bbid', function(req, res, next) {
 	Creator.get_by_id(req.params.bbid)
-		.then(function(results) {
-			res.locals.creator = results[0];
-
-			if (!res.locals.creator)
+		.then(function(result) {
+			if (!result)
 				return next();
+
+			res.locals.creator = result;
 
 			res.render('creator', {
 				title: res.locals.creator.name + ' – BookBrainz',

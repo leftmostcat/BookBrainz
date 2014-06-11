@@ -41,11 +41,11 @@ router.post('/add', auth.isAuthenticated, function(req, res, next) {
 
 router.get('/:bbid', function(req, res, next) {
 	Edition.get_by_id(req.params.bbid)
-		.then(function(results) {
-			res.locals.edition = results[0];
-
-			if (!res.locals.edition)
+		.then(function(result) {
+			if (!result)
 				return next();
+
+			res.locals.edition = result;
 
 			res.render('edition', {
 				title: '“' + res.locals.edition.name + '” – BookBrainz',

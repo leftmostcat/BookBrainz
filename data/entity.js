@@ -16,10 +16,10 @@ Entity.get_by_id = function(id) {
 	var query = knex(this._table);
 
 	this._joins.forEach(function(join) {
-		query = query.join(join.table, join.first, '=', join.second, join.type);
+		query = query.leftJoin(join.table, join.first, join.second);
 	});
 
-	return query.select(this._columns).where(this._id_column, id);
+	return query.first(this._columns).where(this._id_column, id);
 };
 
 Entity._build_search_body = function() {

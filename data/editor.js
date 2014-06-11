@@ -16,7 +16,7 @@ Editor._columns = [
 ];
 
 Editor.get_by_name = function(name) {
-	return knex(this._table).limit(1).select(this._columns).where('name', name);
+	return knex(this._table).first(this._columns).where('name', name);
 };
 
 Editor.insert = function(data) {

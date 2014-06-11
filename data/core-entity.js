@@ -15,9 +15,8 @@ CoreEntity.register = function() {
 	this._tree_table = this._table + '_tree';
 	this._revision_table = this._table + '_revision';
 
-	var make_left_join = function(target, source) {
+	var make_join = function(target, source) {
 		return {
-			type: 'left',
 			table: target,
 			first: source + '.' + target + '_id',
 			second: target + '.' + target + '_id'
@@ -26,13 +25,12 @@ CoreEntity.register = function() {
 
 	this._joins = [
 		{
-			type: 'left',
 			table: this._revision_table,
 			first: this._table + '.master_revision_id',
 			second: this._revision_table + '.revision_id'
 		},
-		make_left_join(this._tree_table, this._revision_table),
-		make_left_join(this._data_table, this._tree_table)
+		make_join(this._tree_table, this._revision_table),
+		make_join(this._data_table, this._tree_table)
 	];
 };
 
